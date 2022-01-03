@@ -18,7 +18,7 @@ export default function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     const loginWasSuccessful = auth.login(formState.email, formState.password);
-    loginWasSuccessful ? history.push('/treehouse') : setError('login was unsuccessful')
+    if(loginWasSuccessful) { history.replace(from)} else {setError('login was unsuccessful')}
     // TODO: If login was unsuccessful, set an error with a message
     // to display to the user that their login failed.
     //
@@ -32,26 +32,26 @@ export default function Login() {
     <>
       <h3>You must log in to view the page at {from.pathname}</h3>
       <form onSubmit={handleLogin} className={styles.loginForm}>
-        <label>Email</label>
+        <label htmlFor='email'>Email</label>
         <input
           id="email"
           name="email"
           type="email"
           value={formState.email}
-          onChange={(e) => handleFormChange(e.target.value)}
+          onChange={handleFormChange}
         />{' '}
-        <label>Password</label>
+        <label htmlFor='password'>Password</label>
         <input
           id="password"
           name="password"
           type="password"
           value={formState.password}
-          onChange={(e) => handleFormChange(e.target)}
+          onChange={handleFormChange}
         />
         <button type="submit" aria-label="Sign In">
           Sign in
         </button>
-        {console.log(formState)}
+       
       </form>
       {error && <h4 className={styles.error}>{error}</h4>}
     </>
